@@ -16,7 +16,7 @@ Publica 1 carrossel por execução no @comerciositatiba, via Graph API, às 11h,
 Actions → "Publicar carrossel no Instagram" → Run workflow → deixar "Só testar" marcado.
 
 ## Pausar
-Actions → workflow → "Disable workflow". Ou trocar o status dos itens na fila para `pausado`.
+Actions → workflow → "Disable workflow". Itens com status diferente de `pendente` (ex.: `aguardando`, `pausado`) não são publicados.
 
 ## Reprocessar uma falha
 Trocar o status da linha de `falha` para `pendente`.
