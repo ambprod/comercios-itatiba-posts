@@ -31,6 +31,7 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "")
 BRANCH = os.environ.get("BRANCH", "main")
 DRY_RUN = os.environ.get("DRY_RUN") == "1"
 BRT = timezone(timedelta(hours=-3))
+CONTA_ESPERADA = "comerciositatiba"
 
 
 def api(method, path, **params):
@@ -59,6 +60,10 @@ def url_imagem(slug, arquivo):
 
 def publicar(linha):
     ig = os.environ["IG_USER_ID"]
+    # Trava de segurança: o token tem acesso a outras contas; só publica no @comerciositatiba
+    conta = api("GET", ig, fields="username").get("username")
+    if conta != CONTA_ESPERADA:
+        raise RuntimeError(f"IG_USER_ID aponta para @{conta}, não para @{CONTA_ESPERADA}. Nada publicado.")
     pasta = RAIZ / "posts" / linha["slug"]
     imagens = sorted(p.name for p in pasta.glob("*.jpg"))
     if not 2 <= len(imagens) <= 10:
