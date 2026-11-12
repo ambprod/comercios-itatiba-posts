@@ -87,6 +87,11 @@ def publicar(linha):
 
 
 def main():
+    if DRY_RUN:  # teste: confere token e conta antes de qualquer publicação
+        conta = api("GET", os.environ["IG_USER_ID"], fields="username").get("username")
+        print(f"Token OK. Conta conectada: @{conta}")
+        if conta != CONTA_ESPERADA:
+            sys.exit(f"ATENÇÃO: a conta deveria ser @{CONTA_ESPERADA}")
     with FILA.open(encoding="utf-8", newline="") as f:
         leitor = csv.DictReader(f)
         campos = leitor.fieldnames
