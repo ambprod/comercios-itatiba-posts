@@ -90,6 +90,15 @@ def main():
     if DRY_RUN:  # teste: confere token e conta antes de qualquer publicação
         conta = api("GET", os.environ["IG_USER_ID"], fields="username").get("username")
         print(f"Token OK. Conta conectada: @{conta}")
+        info = api("GET", "debug_token", input_token=os.environ["IG_ACCESS_TOKEN"]).get("data", {})
+        exp = info.get("expires_at") or info.get("data_access_expires_at")
+        if info.get("expires_at") == 0:
+            print("Validade do token: NÃO EXPIRA")
+        elif exp:
+            fim = datetime.fromtimestamp(exp, BRT)
+            print(f"Validade do token: até {fim:%d/%m/%Y %H:%M}")
+            if fim - datetime.now(BRT) < timedelta(days=7):
+                sys.exit("ATENÇÃO: token vence em menos de 7 dias. Gere um token de Página (não expira).")
         if conta != CONTA_ESPERADA:
             sys.exit(f"ATENÇÃO: a conta deveria ser @{CONTA_ESPERADA}")
     with FILA.open(encoding="utf-8", newline="") as f:
