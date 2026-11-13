@@ -12,6 +12,10 @@ on:
         description: "Só testar (não publica)"
         type: boolean
         default: true
+      forcar:
+        description: "Publicar já, mesmo antes do horário previsto"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -35,6 +39,7 @@ jobs:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
           BRANCH: ${{ github.ref_name }}
+          FORCAR: ${{ github.event_name == 'workflow_dispatch' && inputs.forcar && '1' || '0' }}
         run: python publicar.py
       - name: Salvar status da fila
         run: |

@@ -113,6 +113,13 @@ def main():
         return
 
     linha = pendentes[0]
+    # Trava de horário: evita que um disparo atrasado/duplicado publique antes da hora prevista
+    prev = (linha.get("previsto") or "").strip()
+    if prev and not DRY_RUN and os.environ.get("FORCAR") != "1":
+        quando = datetime.strptime(prev, "%Y-%m-%d %H:%M").replace(tzinfo=BRT)
+        if datetime.now(BRT) < quando - timedelta(minutes=15):
+            print(f"Ainda não é hora: {linha['nome']} está previsto para {prev}. Nada publicado.")
+            return
     print(f"Publicando: {linha['nome']} ({linha['arroba']})")
     try:
         media_id = publicar(linha)
