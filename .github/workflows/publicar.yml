@@ -3,9 +3,9 @@ name: Publicar carrossel no Instagram
 on:
   schedule:
     # 11h, 15h e 19h no horário de Brasília (UTC-3)
-    - cron: "0 14 * * *"
-    - cron: "0 18 * * *"
-    - cron: "0 22 * * *"
+    - cron: "7 14 * * *"
+    - cron: "7 18 * * *"
+    - cron: "7 22 * * *"
   workflow_dispatch:
     inputs:
       dry_run:

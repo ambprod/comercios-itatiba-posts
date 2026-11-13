@@ -108,6 +108,8 @@ def main():
     try:
         media_id = publicar(linha)
     except Exception as e:  # registra a falha e segue para o próximo na próxima execução
+        if '"code":190' in str(e):  # token vencido/inválido: não é culpa do post, mantém na fila
+            sys.exit("TOKEN DO INSTAGRAM VENCIDO OU INVÁLIDO: atualize o secret IG_ACCESS_TOKEN. Nada foi alterado na fila.")
         linha["status"] = "falha"
         linha["media_id"] = str(e)[:300]
         print("FALHA:", e, file=sys.stderr)

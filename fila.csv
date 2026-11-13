@@ -4,7 +4,7 @@ ordem,slug,nome,arroba,legenda,status,previsto,media_id,publicado_em
 (arte e texto gerados por IA a partir do cadastro no guia)",publicado,2026-11-12 17:14,17883517194627874,2026-11-12 17:14
 2,guardia-floricultura,Guardiã Floricultura,@guardiaplantas,"Conheça @guardiaplantas, no Comércios Itatiba. Confira no guia pelo link da bio.
 
-(arte e texto gerados por IA a partir do cadastro no guia)",falha,2026-11-12 19:00,"Erro da API em 17841415374427891: 400 {""error"":{""message"":""Error validating access token: Session has expired on Thursday, 12-Nov-26 13:00:00 PST. The current time is Thursday, 12-Nov-26 18:28:48 PST."",""code"":190,""type"":""OAuthException"",""error_subcode"":463,""fbtrace_id"":""AFKxHSnWYFphNTPpSZVNpgS""}}",
+(arte e texto gerados por IA a partir do cadastro no guia)",pendente,2026-11-12 19:00,,
 3,2-kazza-by-marcos-aurelio,2 kazza BY Marcos Aurélio,@marcosaureliolello,"Conheça @marcosaureliolello, no Comércios Itatiba. Confira no guia pelo link da bio.
 
 (arte e texto gerados por IA a partir do cadastro no guia)",pendente,2026-11-13 11:00,,
